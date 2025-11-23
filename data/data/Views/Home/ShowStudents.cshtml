@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@using data.Models
+@model List<Student>
+
+<style>
+    .table {
+        /* background-color: aqua; */
+        width: 50%;
+        height: auto;
+        margin: auto;
+        padding: 1rem;
+    }
+</style>
+
+<table class="table caption-top mt-5 table-dark table-hover">
+    <caption><a href="@Url.Action("Index","Home")" class="btn btn-success">Add Student +</a></caption>
+    <thead>
+        <tr style="text-align: left;" class="table-active">
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Class</th>
+            <th scope="col">Section</th>
+            <th style="text-align: center;" scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach (var students in Model)
+        {
+            <tr>
+                <th scope="row">@students.std_id</th>
+                <td>@students.std_name</td>
+                <td>@students.std_class</td>
+                <td>@students.std_section</td>
+                <td style="text-align: center;">
+                    <a href="@Url.Action("Edit", "Home", new { id = students.std_id })" class="btn btn-primary">Update</a>
+                    <a href="@Url.Action("Delete", "Home", new { id = students.std_id })" class="btn btn-danger" onclick="alert('Are you sure you want to delete this record?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
